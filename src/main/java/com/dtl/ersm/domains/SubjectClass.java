@@ -20,7 +20,7 @@ public class SubjectClass {
   @Column(name = "CODE")
   private String code;
 
-  @Column(name = "NAME")
+  @Column(name = "No")
   private String name;
 
   @Column(name = "SBJ_CODE")
