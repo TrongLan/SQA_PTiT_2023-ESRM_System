@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Entity
-@Table(name = "LECTURE")
+@Table(name = "lecture")
 @Slf4j
 @Getter
 @Setter
