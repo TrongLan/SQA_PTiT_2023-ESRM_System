@@ -21,7 +21,8 @@ public class DataGenerator {
     List<String> gender = Arrays.asList("Nam", "Nữ", "Khác");
 
     //    log.info(valuesForInsertingLecture(20, firstName, middleName, lastName, random));
-    log.info(valuesForInsertingStudent(1000, firstName, middleName, lastName, gender, random));
+//    log.info(valuesForInsertingStudent(1000, firstName, middleName, lastName, gender, random));
+    log.info(valuesForInsertingStudentClass("SJ_05_01"));
   }
 
   public static String valuesForInsertingLecture(
@@ -67,6 +68,15 @@ public class DataGenerator {
               String.format("2001-%02d-%02d", random.nextInt(1, 12), random.nextInt(1, 28)),
               String.format("%s", gender.get(random.nextInt(gender.size())))));
       if (i < numberOfRecords - 1) s.append(", ");
+    }
+    return s.toString();
+  }
+
+  public static String valuesForInsertingStudentClass(String classCode) {
+    StringBuilder s = new StringBuilder("");
+    for (int i = 40; i <= 100; i++) {
+      s.append(String.format("(\"%s\", \"%s\")", classCode, String.format("STUDENT_%05d", i)));
+      if (i < 100) s.append(", ");
     }
     return s.toString();
   }

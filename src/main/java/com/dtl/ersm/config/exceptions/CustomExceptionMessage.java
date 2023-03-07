@@ -7,6 +7,7 @@ public class CustomExceptionMessage {
   // SUBJECT
 
   // SUBJECT CLASS
+  public static String SUBJECT_CLASS_NOT_EXIST = "Không tồn tại lớp mô học với mã %s";
 
   // STUDENT
 

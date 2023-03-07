@@ -28,6 +28,9 @@ public class Student {
   @Column(name = "LAST_NAME")
   private String lastName;
 
+  @Column(name = "GENDER")
+  private String gender;
+
   @Column(name = "BIRTH_DATE")
   private LocalDate birthDate;
 

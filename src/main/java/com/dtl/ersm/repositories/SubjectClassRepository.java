@@ -22,4 +22,5 @@ public interface SubjectClassRepository extends JpaRepository<SubjectClass, Long
               + "order by c.code")
   List<ClassDTO> getClassesByLectureCode(
       String lectureCode, @Param("criteria") StudentClassFilterCriteria criteria);
+  boolean existsByCode(String code);
 }
