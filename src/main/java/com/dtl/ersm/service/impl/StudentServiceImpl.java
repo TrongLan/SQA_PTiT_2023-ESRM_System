@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
@@ -27,10 +29,11 @@ public class StudentServiceImpl implements StudentService {
     if (!subjectClassRepository.existsByCode(classCode))
       throw new ERSMCustomException(
           String.format(CustomExceptionMessage.SUBJECT_CLASS_NOT_EXIST, classCode));
-    if (!StringUtils.hasText(criteria.getFullName()))
+    if (StringUtils.hasText(criteria.getFullName()))
       criteria.setFullName(criteria.getFullName().toLowerCase());
     Page<StudentDetailDTO> page =
         studentRepository.getStudentsByCriterias(classCode, criteria, pageable);
-    return new PageImpl<>(page.getContent(), page.getPageable(), page.getTotalElements());
+    List<StudentDetailDTO> content = page.getContent();
+    return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
   }
 }

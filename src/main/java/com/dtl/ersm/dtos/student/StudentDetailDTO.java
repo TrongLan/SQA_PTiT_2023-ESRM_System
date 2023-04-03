@@ -1,6 +1,8 @@
 package com.dtl.ersm.dtos.student;
 
+import com.dtl.ersm.config.constants.StudentStatus;
 import com.dtl.ersm.domains.Student;
+import com.dtl.ersm.domains.StudentClass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,13 +21,15 @@ public class StudentDetailDTO {
   private String gender;
   private LocalDate birthDate;
   private Integer status;
+  private String statusDescription;
 
-  public StudentDetailDTO(Student student){
+  public StudentDetailDTO(Student student, StudentClass studentClass) {
     this.code = student.getCode();
     this.firstName = student.getFirstName();
-    this.lastName =student.getLastName();
+    this.lastName = student.getLastName();
     this.gender = student.getGender();
     this.birthDate = student.getBirthDate();
-    this.status = student.getStatus();
+    this.status = studentClass.getStatus();
+    this.statusDescription = StudentStatus.getStudentStatusMap().get(studentClass.getStatus());
   }
 }

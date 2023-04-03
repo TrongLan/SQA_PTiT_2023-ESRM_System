@@ -1,7 +1,9 @@
 package com.dtl.ersm.controllers;
 
 import com.dtl.ersm.config.exceptions.ERSMCustomException;
+import com.dtl.ersm.dtos.student.StudentScoreDTO;
 import com.dtl.ersm.dtos.student.StudentSearchCriteria;
+import com.dtl.ersm.service.StudentScoreService;
 import com.dtl.ersm.service.StudentService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class StudentController {
   private final StudentService studentService;
+  private final StudentScoreService studentScoreService;
 
   @GetMapping(value = "/{classCode}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> listStudent(
@@ -36,5 +39,18 @@ public class StudentController {
       log.error(e.getMessage());
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @PostMapping(value = "/score", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Object> studentScoreUpdate(@RequestBody StudentScoreDTO dto) {
+    try {
+      studentScoreService.scoreUpdate(dto);
+    } catch (ERSMCustomException e) {
+      return new ResponseEntity<>(e.getCustomErrorMessage(), HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
+      log.error(e.getMessage());
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 }

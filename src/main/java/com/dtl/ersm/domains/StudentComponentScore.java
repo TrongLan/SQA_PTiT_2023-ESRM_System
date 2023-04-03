@@ -1,5 +1,6 @@
 package com.dtl.ersm.domains;
 
+import com.dtl.ersm.dtos.student.StudentScorePK;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,15 @@ public class StudentComponentScore {
   @Column(name = "STUDENT_CODE")
   private String studentCode;
 
+  @Column(name = "CLASS_CODE")
+  private String classCode;
+
   @Column(name = "SCORE")
   private Float score;
+
+  public StudentComponentScore(StudentScorePK pk) {
+    this.classComponentScoreId = pk.componentScoreId();
+    this.studentCode = pk.studentCode();
+    this.classCode = pk.classCode();
+  }
 }
