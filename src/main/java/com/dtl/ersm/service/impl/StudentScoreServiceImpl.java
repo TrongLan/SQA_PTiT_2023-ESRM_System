@@ -10,6 +10,7 @@ import com.dtl.ersm.dtos.student.StudentScoreDTO;
 import com.dtl.ersm.dtos.student.StudentScorePK;
 import com.dtl.ersm.repositories.*;
 import com.dtl.ersm.service.StudentScoreService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+//@NoArgsConstructor
 @Slf4j
 public class StudentScoreServiceImpl implements StudentScoreService {
   private final StudentComponentScoreRepository studentComponentScoreRepository;
@@ -51,7 +53,7 @@ public class StudentScoreServiceImpl implements StudentScoreService {
 
   @Override
   @Transactional
-  public void scoreUpdate(StudentScoreDTO dto) throws ERSMCustomException {
+  public List<StudentComponentScore> scoreUpdate(StudentScoreDTO dto) throws ERSMCustomException {
     if (studentRepository.findFirstByCode(dto.getStudentCode()).isEmpty()) {
       throw new ERSMCustomException(
           String.format(CustomExceptionMessage.STUDENT_CODE_NOT_EXIST, dto.getStudentCode()));
@@ -83,7 +85,7 @@ public class StudentScoreServiceImpl implements StudentScoreService {
       domain.setScore(dto.getScoreMap().get(componentScoreId));
       domains.add(domain);
     }
-    studentComponentScoreRepository.saveAll(domains);
+    List<StudentComponentScore> domainsSaved = studentComponentScoreRepository.saveAll(domains);
 
     // cập nhật trạng thái sinh viên trong lớp
     Optional<StudentClass> studentClassOptional =
@@ -112,5 +114,7 @@ public class StudentScoreServiceImpl implements StudentScoreService {
       }
     }
     studentClassRepository.save(studentClass);
+
+    return domainsSaved;
   }
 }
