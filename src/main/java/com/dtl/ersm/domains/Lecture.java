@@ -1,10 +1,7 @@
 package com.dtl.ersm.domains;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Entity
@@ -14,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Lecture {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

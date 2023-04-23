@@ -12,5 +12,4 @@ public class CustomExceptionMessage {
   // STUDENT
   public static String STUDENT_CODE_NOT_EXIST = "Không tồn tại sinh viên với mã %s";
   public static String STUDENT_SCORE_INVALID = "Điểm thành phần không hợp lệ";
-
 }

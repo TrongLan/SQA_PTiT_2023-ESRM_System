@@ -1,16 +1,14 @@
 package com.dtl.ersm.domains;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @Table(name = "SBJ_CLASS")
 public class SubjectClass {
   @Id
